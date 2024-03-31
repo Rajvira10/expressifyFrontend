@@ -2,7 +2,8 @@ import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
-import Navbar from "../components/Navbar";
+import Providers from "./providers";
+import { Toaster } from "@/components/ui/toaster";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable
         )}
       >
-        {children}
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

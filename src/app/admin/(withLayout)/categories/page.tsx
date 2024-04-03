@@ -16,13 +16,14 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { Suspense } from "react";
 import Routes from "@/lib/routes";
+import AddCategory from "@/components/Category/AddCategory";
 
 export const metadata: Metadata = {
-  title: "Learning Tracks",
-  description: "List of Learning Tracks",
+  title: "Categories",
+  description: "List of Categories",
 };
 
-export type LearningTrack = {
+export type Category = {
   id: number;
   title: string;
   description: string;
@@ -31,43 +32,44 @@ export type LearningTrack = {
 export default async function Dashboard() {
   const adminToken = cookies().get("adminToken")?.value;
 
-  const data = await axios.get(Routes.LIST_LEARNING_TRACKS, {
+  const data = await axios.get(Routes.LIST_CATEGORIES, {
     headers: {
       Authorization: `Bearer ${adminToken}`,
     },
   });
 
-  const learningTracks: LearningTrack[] = data.data.learning_tracks;
+  const categories: Category[] = data.data.categories;
 
-  if (learningTracks.length > 0) {
-    learningTracks.map((learningTrack) => {
-      learningTrack.description =
-        learningTrack.description.length > 50
-          ? learningTrack.description.substring(0, 50) + "..."
-          : learningTrack.description;
+  if (categories.length > 0) {
+    categories.map((category) => {
+      category.description =
+        category.description.length > 50
+          ? category.description.substring(0, 50) + "..."
+          : category.description;
     });
+
     return (
       <Suspense fallback={"Loading..."}>
         <div className="flex justify-between items-center">
-          <h1 className="text-lg font-semibold md:text-2xl">Learning Tracks</h1>
+          <h1 className="text-lg font-semibold md:text-2xl">Categories</h1>
           <Sheet>
             <SheetTrigger asChild>
-              <Button>Add Learning Track</Button>
+              <Button>Add Category</Button>
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>
-                  <h2>Add Learning Track</h2>
+                  <h2>Add Category</h2>
                 </SheetTitle>
                 <SheetDescription>
-                  <AddLearningTrack />
+                  <AddCategory />
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>
           </Sheet>
         </div>
 
-        <DataTable columns={columns} data={learningTracks} />
+        <DataTable columns={columns} data={categories} />
       </Suspense>
     );
   }
@@ -75,27 +77,27 @@ export default async function Dashboard() {
   return (
     <Suspense fallback={"Loading..."}>
       <div className="flex justify-between items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">Learning Tracks</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Categories</h1>
       </div>
       <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
         <div className="flex flex-col items-center gap-1 text-center">
           <h3 className="text-2xl font-bold tracking-tight">
-            You have no Learning Track
+            You have no Category
           </h3>
           <p className="text-sm text-muted-foreground">
-            Get started by adding a Learning Track
+            Get started by adding a Category
           </p>
           <Sheet>
             <SheetTrigger asChild>
-              <Button className="mt-4">Add Learning Track</Button>
+              <Button className="mt-4">Add Category</Button>
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>
-                  <h2>Add Learning Track</h2>
+                  <h2>Add Category</h2>
                 </SheetTitle>
                 <SheetDescription>
-                  <AddLearningTrack />
+                  <AddCategory />
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>

@@ -15,7 +15,7 @@ import { useCookies } from "next-client-cookies";
 import { Textarea } from "../ui/textarea";
 import Routes from "@/lib/routes";
 
-interface AddLearningTrackProps {}
+interface AddCategoryProps {}
 
 type FormFields = {
   title: string;
@@ -27,7 +27,7 @@ const schema = z.object({
   description: z.string().min(1),
 });
 
-const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
+const AddCategory: FC<AddCategoryProps> = ({}) => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -35,7 +35,7 @@ const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
 
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(Routes.ADD_LEARNING_TRACK, data, {
+      const response = await axios.post(Routes.ADD_CATEGORY, data, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },
@@ -53,7 +53,7 @@ const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Learning Track added successfully.",
+        description: "Category added successfully.",
       });
       reset();
 
@@ -110,4 +110,4 @@ const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
   );
 };
 
-export default AddLearningTrack;
+export default AddCategory;

@@ -15,7 +15,12 @@ import { useCookies } from "next-client-cookies";
 import { Textarea } from "../ui/textarea";
 import Routes from "@/lib/routes";
 
-interface AddLearningTrackProps {}
+interface EditLearningTrackProps {
+  id: number;
+  title: string;
+  description: string;
+  onClose: () => void;
+}
 
 type FormFields = {
   title: string;
@@ -27,7 +32,12 @@ const schema = z.object({
   description: z.string().min(1),
 });
 
-const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
+const EditLearningTrack: FC<EditLearningTrackProps> = ({
+  id,
+  title,
+  description,
+  onClose,
+}) => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -35,11 +45,17 @@ const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
 
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(Routes.ADD_LEARNING_TRACK, data, {
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-        },
-      });
+      const response = await axios.post(
+        Routes.UPDATE_LEARNING_TRACK(id),
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+        }
+      );
+
+      onClose();
 
       return response.data;
     },
@@ -53,22 +69,19 @@ const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Learning Track added successfully.",
+        description: "Learning Track updated successfully.",
       });
-      reset();
-
       router.refresh();
     },
   });
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormFields>({
     defaultValues: {
-      title: "",
-      description: "",
+      title: title,
+      description: description,
     },
     resolver: zodResolver(schema),
     mode: "onBlur",
@@ -110,4 +123,4 @@ const AddLearningTrack: FC<AddLearningTrackProps> = ({}) => {
   );
 };
 
-export default AddLearningTrack;
+export default EditLearningTrack;

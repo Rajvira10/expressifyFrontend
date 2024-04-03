@@ -13,6 +13,7 @@ import { FC, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { GiTeacher } from "react-icons/gi";
+import { TbCategory } from "react-icons/tb";
 import { usePathname } from "next/navigation";
 
 interface AdminSidebarProps {}
@@ -46,6 +47,20 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               <Home className="h-4 w-4" />
               Dashboard
             </Link>
+
+            <Link
+              href="/admin/categories"
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                active?.includes("categories")
+                  ? "bg-muted text-primary"
+                  : "text-muted-foreground"
+              )}
+            >
+              <TbCategory className="h-4 w-4" />
+              Categories
+            </Link>
+
             <Link
               href="/admin/learning-tracks"
               className={cn(

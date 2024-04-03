@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import Routes from "@/lib/routes";
 
 const schema = z.object({
   email: z.string().email(),
@@ -31,10 +32,7 @@ export default function LoginForm() {
 
   const { mutate: loginMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
-        data
-      );
+      const response = await axios.post(Routes.ADMIN_LOGIN, data);
 
       document.cookie = `adminToken=${response.data.token}; path=/`;
       document.cookie = `name=${response.data.name}; path=/`;

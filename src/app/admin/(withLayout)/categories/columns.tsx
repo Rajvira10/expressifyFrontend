@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { LearningTrack } from "./page";
+import { Category } from "./page";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -40,7 +40,7 @@ import EditLearningTrack from "@/components/LearningTrack/EditLearningTrack";
 import { useState } from "react";
 import DeleteLearningTrack from "@/components/LearningTrack/DeleteLearningTrack";
 
-export const columns: ColumnDef<LearningTrack>[] = [
+export const columns: ColumnDef<Category>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -142,7 +142,7 @@ export const columns: ColumnDef<LearningTrack>[] = [
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      
+
                       <DeleteLearningTrack
                         id={row.row.original.id}
                         onClose={() => setIsOpen(false)}

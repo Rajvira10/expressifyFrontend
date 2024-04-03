@@ -15,7 +15,7 @@ import { useCookies } from "next-client-cookies";
 import { Textarea } from "../ui/textarea";
 import Routes from "@/lib/routes";
 
-interface EditCourseProps {
+interface EditTopicProps {
   id: number;
   title: string;
   description: string;
@@ -32,7 +32,7 @@ const schema = z.object({
   description: z.string().min(1),
 });
 
-const EditCourse: FC<EditCourseProps> = ({
+const EditTopic: FC<EditTopicProps> = ({
   id,
   title,
   description,
@@ -45,7 +45,7 @@ const EditCourse: FC<EditCourseProps> = ({
 
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.put(Routes.UPDATE_COURSE(id), data, {
+      const response = await axios.put(Routes.UPDATE_TOPIC(id), data, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },
@@ -65,7 +65,7 @@ const EditCourse: FC<EditCourseProps> = ({
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Course updated successfully.",
+        description: "Topic updated successfully.",
       });
       router.refresh();
     },
@@ -119,4 +119,4 @@ const EditCourse: FC<EditCourseProps> = ({
   );
 };
 
-export default EditCourse;
+export default EditTopic;

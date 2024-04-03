@@ -15,12 +15,7 @@ import { useCookies } from "next-client-cookies";
 import { Textarea } from "../ui/textarea";
 import Routes from "@/lib/routes";
 
-interface EditCourseProps {
-  id: number;
-  title: string;
-  description: string;
-  onClose: () => void;
-}
+interface AddTopicProps {}
 
 type FormFields = {
   title: string;
@@ -32,12 +27,7 @@ const schema = z.object({
   description: z.string().min(1),
 });
 
-const EditCourse: FC<EditCourseProps> = ({
-  id,
-  title,
-  description,
-  onClose,
-}) => {
+const AddTopic: FC<AddTopicProps> = ({}) => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -45,13 +35,11 @@ const EditCourse: FC<EditCourseProps> = ({
 
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.put(Routes.UPDATE_COURSE(id), data, {
+      const response = await axios.post(Routes.ADD_TOPIC, data, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },
       });
-
-      onClose();
 
       return response.data;
     },
@@ -65,19 +53,22 @@ const EditCourse: FC<EditCourseProps> = ({
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Course updated successfully.",
+        description: "Topic added successfully.",
       });
+      reset();
+
       router.refresh();
     },
   });
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormFields>({
     defaultValues: {
-      title: title,
-      description: description,
+      title: "",
+      description: "",
     },
     resolver: zodResolver(schema),
     mode: "onBlur",
@@ -119,4 +110,4 @@ const EditCourse: FC<EditCourseProps> = ({
   );
 };
 
-export default EditCourse;
+export default AddTopic;

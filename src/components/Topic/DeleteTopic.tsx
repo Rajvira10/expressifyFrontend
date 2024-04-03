@@ -9,12 +9,12 @@ import { useCookies } from "next-client-cookies";
 import { AlertDialogAction } from "../ui/alert-dialog";
 import Routes from "@/lib/routes";
 
-interface DeleteCourseProps {
+interface DeleteTopicProps {
   id: number;
   onClose: () => void;
 }
 
-const DeleteCourse: FC<DeleteCourseProps> = ({ id, onClose }) => {
+const DeleteTopic: FC<DeleteTopicProps> = ({ id, onClose }) => {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -23,7 +23,7 @@ const DeleteCourse: FC<DeleteCourseProps> = ({ id, onClose }) => {
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async () => {
       const response = await axios.post(
-        Routes.DELETE_COURSE(id),
+        Routes.DELETE_TOPIC(id),
         {},
         {
           headers: {
@@ -46,7 +46,7 @@ const DeleteCourse: FC<DeleteCourseProps> = ({ id, onClose }) => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Course deleted successfully.",
+        description: "Topic deleted successfully.",
       });
       router.refresh();
     },
@@ -65,4 +65,4 @@ const DeleteCourse: FC<DeleteCourseProps> = ({ id, onClose }) => {
   );
 };
 
-export default DeleteCourse;
+export default DeleteTopic;

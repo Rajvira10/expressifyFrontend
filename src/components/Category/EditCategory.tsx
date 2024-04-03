@@ -45,7 +45,7 @@ const EditCategory: FC<EditCategoryProps> = ({
 
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(Routes.UPDATE_CATEGORY(id), data, {
+      const response = await axios.put(Routes.UPDATE_CATEGORY(id), data, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },

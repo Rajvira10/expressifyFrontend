@@ -45,15 +45,11 @@ const EditLearningTrack: FC<EditLearningTrackProps> = ({
 
   const { mutate: trackMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(
-        Routes.UPDATE_LEARNING_TRACK(id),
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${adminToken}`,
-          },
-        }
-      );
+      const response = await axios.put(Routes.UPDATE_LEARNING_TRACK(id), data, {
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+        },
+      });
 
       onClose();
 

@@ -14,6 +14,7 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { GiTeacher } from "react-icons/gi";
 import { TbCategory } from "react-icons/tb";
+import { MdTopic } from "react-icons/md";
 import { usePathname } from "next/navigation";
 
 interface AdminSidebarProps {}
@@ -53,7 +54,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                 active?.includes("categories")
-                  ? "bg-muted text-primary"
+                  ? "bg-[#facc15] text-black"
                   : "text-muted-foreground"
               )}
             >
@@ -66,7 +67,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                 active?.includes("learning-tracks")
-                  ? "bg-muted text-primary"
+                  ? "bg-[#facc15] text-black"
                   : "text-muted-foreground"
               )}
             >
@@ -78,19 +79,33 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                 active?.includes("courses")
-                  ? "bg-muted text-primary"
+                  ? "bg-[#facc15] text-black"
                   : "text-muted-foreground"
               )}
             >
               <BookA className="h-4 w-4" />
               Courses{" "}
             </Link>
+
+            <Link
+              href="/admin/topics"
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                active?.includes("topics")
+                  ? "bg-[#facc15] text-black"
+                  : "text-muted-foreground"
+              )}
+            >
+              <MdTopic className="h-4 w-4" />
+              Topics
+            </Link>
+
             <Link
               href="/admin/learners"
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                 active?.includes("learners")
-                  ? "bg-muted text-primary"
+                  ? "bg-[#facc15] text-black"
                   : "text-muted-foreground"
               )}
             >
@@ -102,7 +117,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                 active?.includes("mentors")
-                  ? "bg-muted text-primary"
+                  ? "bg-[#facc15] text-black"
                   : "text-muted-foreground"
               )}
             >
@@ -114,7 +129,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                 active?.includes("reports")
-                  ? "bg-muted text-primary"
+                  ? "bg-[#facc15] text-black"
                   : "text-muted-foreground"
               )}
             >

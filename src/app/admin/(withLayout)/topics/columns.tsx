@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Category } from "./page";
+import { Topic } from "./page";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -36,13 +36,11 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader";
-import EditLearningTrack from "@/components/LearningTrack/EditLearningTrack";
 import { useState } from "react";
-import DeleteLearningTrack from "@/components/LearningTrack/DeleteLearningTrack";
-import DeleteCategory from "@/components/Category/DeleteCategory";
-import EditCategory from "@/components/Category/EditCategory";
+import DeleteTopic from "@/components/Topic/DeleteTopic";
+import EditTopic from "@/components/Topic/EditTopic";
 
-export const columns: ColumnDef<Category>[] = [
+export const columns: ColumnDef<Topic>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -114,10 +112,10 @@ export const columns: ColumnDef<Category>[] = [
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle>
-                        <h2>Edit Learning Track</h2>
+                        <h2>Edit Topic</h2>
                       </DialogTitle>
                       <DialogDescription>
-                        <EditCategory
+                        <EditTopic
                           id={row.row.original.id}
                           title={row.row.original.title}
                           description={row.row.original.description}
@@ -145,7 +143,7 @@ export const columns: ColumnDef<Category>[] = [
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
 
-                      <DeleteCategory
+                      <DeleteTopic
                         id={row.row.original.id}
                         onClose={() => setIsOpen(false)}
                       />

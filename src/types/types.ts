@@ -18,4 +18,13 @@ export type Course = {
   title: string;
   description: string;
   learning_tracks: LearningTrack[] | null;
+  topics: Topic[] | null;
 };
+
+export type Topic = {
+  id: number;
+  title: string;
+  description: string;
+  courses: Course[] | null;
+};
+

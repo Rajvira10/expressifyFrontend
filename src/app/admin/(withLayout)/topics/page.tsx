@@ -16,16 +16,11 @@ import { DataTable } from "./data-table";
 import { Suspense } from "react";
 import Routes from "@/lib/routes";
 import AddTopic from "@/components/Topic/AddTopic";
+import { Topic } from "@/types/types";
 
 export const metadata: Metadata = {
   title: "Topics",
   description: "List of topics",
-};
-
-export type Topic = {
-  id: number;
-  title: string;
-  description: string;
 };
 
 export default async function Dashboard() {

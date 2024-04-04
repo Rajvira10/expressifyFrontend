@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Topic } from "./page";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -39,6 +38,16 @@ import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader"
 import { useState } from "react";
 import DeleteTopic from "@/components/Topic/DeleteTopic";
 import EditTopic from "@/components/Topic/EditTopic";
+import { Topic } from "@/types/types";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import ManageCourses from "@/components/Topic/ManageCourses";
 
 export const columns: ColumnDef<Topic>[] = [
   {
@@ -104,6 +113,53 @@ export const columns: ColumnDef<Topic>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <Sheet>
+                  <SheetTrigger>Manage Courses</SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>
+                        <h2>Manage Courses</h2>
+                      </SheetTitle>
+                      <SheetDescription>
+                        <ManageCourses id={row.row.original.id} />
+                      </SheetDescription>
+                    </SheetHeader>
+                  </SheetContent>
+                </Sheet>
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <Sheet>
+                  <SheetTrigger>Manage Learning Materials</SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>
+                        <h2>Manage Topics</h2>
+                      </SheetTitle>
+                      <SheetDescription>
+                        {/* <ManageTopics id={row.row.original.id} /> */}
+                      </SheetDescription>
+                    </SheetHeader>
+                  </SheetContent>
+                </Sheet>
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <Sheet>
+                  <SheetTrigger>Manage Assignments</SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>
+                        <h2>Manage Topics</h2>
+                      </SheetTitle>
+                      <SheetDescription>
+                        {/* <ManageTopics id={row.row.original.id} /> */}
+                      </SheetDescription>
+                    </SheetHeader>
+                  </SheetContent>
+                </Sheet>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 {" "}

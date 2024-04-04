@@ -40,6 +40,18 @@ const Routes = {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/update/${id}`,
   DELETE_COURSE: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/delete/${id}`,
+  GET_LEARNING_TRACKS_BY_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/learning-tracks/${id}`,
+  ADD_LEARNING_TRACK_TO_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/add-learning-track/${id}`,
+  REMOVE_LEARNING_TRACK_FROM_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/remove-learning-track/${id}`,
+  GET_TOPICS_BY_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/topics/${id}`,
+  ADD_TOPIC_TO_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/add-topic/${id}`,
+  REMOVE_TOPIC_FROM_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/remove-topic/${id}`,
 
   LIST_TOPICS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/list`,
   ADD_TOPIC: `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/store`,
@@ -47,6 +59,12 @@ const Routes = {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/update/${id}`,
   DELETE_TOPIC: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/delete/${id}`,
+  GET_COURSES_BY_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/courses/${id}`,
+  ADD_COURSE_TO_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/add-course/${id}`,
+  REMOVE_COURSE_FROM_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/remove-course/${id}`,
 };
 
 export default Routes;

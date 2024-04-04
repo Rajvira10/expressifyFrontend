@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Category } from "./page";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -41,6 +40,16 @@ import { useState } from "react";
 import DeleteLearningTrack from "@/components/LearningTrack/DeleteLearningTrack";
 import DeleteCategory from "@/components/Category/DeleteCategory";
 import EditCategory from "@/components/Category/EditCategory";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import ManageLearningTracks from "@/components/Category/ManageLearningTracks";
+import { Category } from "@/types/types";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -108,6 +117,22 @@ export const columns: ColumnDef<Category>[] = [
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <Sheet>
+                  <SheetTrigger>Manage Learning Tracks</SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>
+                        <h2>Manage Learning Tracks</h2>
+                      </SheetTitle>
+                      <SheetDescription>
+                        <ManageLearningTracks id={row.row.original.id} />
+                      </SheetDescription>
+                    </SheetHeader>
+                  </SheetContent>
+                </Sheet>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 {" "}
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                   <DialogTrigger>Edit</DialogTrigger>
@@ -138,7 +163,7 @@ export const columns: ColumnDef<Category>[] = [
                       </AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently
-                        delete your learning track and remove your data from our
+                        delete your category and remove your data from our
                         servers.
                       </AlertDialogDescription>
                     </AlertDialogHeader>

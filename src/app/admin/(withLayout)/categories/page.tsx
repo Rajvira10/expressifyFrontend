@@ -17,17 +17,14 @@ import { DataTable } from "./data-table";
 import { Suspense } from "react";
 import Routes from "@/lib/routes";
 import AddCategory from "@/components/Category/AddCategory";
+import { Category } from "@/types/types";
 
 export const metadata: Metadata = {
   title: "Categories",
   description: "List of Categories",
 };
 
-export type Category = {
-  id: number;
-  title: string;
-  description: string;
-};
+
 
 export default async function Dashboard() {
   const adminToken = cookies().get("adminToken")?.value;

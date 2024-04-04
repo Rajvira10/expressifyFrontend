@@ -16,17 +16,14 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { Suspense } from "react";
 import Routes from "@/lib/routes";
+import { LearningTrack } from "@/types/types";
 
 export const metadata: Metadata = {
   title: "Learning Tracks",
   description: "List of Learning Tracks",
 };
 
-export type LearningTrack = {
-  id: number;
-  title: string;
-  description: string;
-};
+
 
 export default async function Dashboard() {
   const adminToken = cookies().get("adminToken")?.value;

@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { LearningTrack } from "./page";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -39,6 +38,17 @@ import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader"
 import EditLearningTrack from "@/components/LearningTrack/EditLearningTrack";
 import { useState } from "react";
 import DeleteLearningTrack from "@/components/LearningTrack/DeleteLearningTrack";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import ManageCategories from "@/components/LearningTrack/ManageCategories";
+import { LearningTrack } from "@/types/types";
+import ManageCourses from "@/components/LearningTrack/ManageCourses";
 
 export const columns: ColumnDef<LearningTrack>[] = [
   {
@@ -106,6 +116,37 @@ export const columns: ColumnDef<LearningTrack>[] = [
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <Sheet>
+                  <SheetTrigger>Manage Categories</SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>
+                        <h2>Manage Categories</h2>
+                      </SheetTitle>
+                      <SheetDescription>
+                        <ManageCategories id={row.row.original.id} />
+                      </SheetDescription>
+                    </SheetHeader>
+                  </SheetContent>
+                </Sheet>
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <Sheet>
+                  <SheetTrigger>Manage Courses</SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>
+                        <h2>Manage Courses</h2>
+                      </SheetTitle>
+                      <SheetDescription>
+                        <ManageCourses id={row.row.original.id} />
+                      </SheetDescription>
+                    </SheetHeader>
+                  </SheetContent>
+                </Sheet>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 {" "}
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                   <DialogTrigger>Edit</DialogTrigger>
@@ -142,7 +183,7 @@ export const columns: ColumnDef<LearningTrack>[] = [
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      
+
                       <DeleteLearningTrack
                         id={row.row.original.id}
                         onClose={() => setIsOpen(false)}

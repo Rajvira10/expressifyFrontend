@@ -43,7 +43,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <Link
               href="/admin"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary-foreground"
             >
               <Home className="h-4 w-4" />
               Dashboard
@@ -52,9 +52,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/categories"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("categories")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
@@ -65,9 +65,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/learning-tracks"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("learning-tracks")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
@@ -77,9 +77,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/courses"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("courses")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
@@ -90,9 +90,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/topics"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("topics")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
@@ -103,9 +103,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/learners"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("learners")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
@@ -115,9 +115,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/mentors"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("mentors")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
@@ -127,9 +127,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
             <Link
               href="/admin/reports"
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
                 active?.includes("reports")
-                  ? "bg-[#facc15] text-black"
+                  ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >

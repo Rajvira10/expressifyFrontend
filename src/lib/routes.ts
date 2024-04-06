@@ -105,6 +105,9 @@ const Routes = {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/mentor/remove-learner/${id}`,
   GET_LEARNERS_BY_MENTOR: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/mentor/assigned-learners/${id}`,
+
+  LEARNER_LOGIN: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/login`,
+  LEARNER_LOGOUT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/logout`,
 };
 
 export default Routes;

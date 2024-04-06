@@ -32,7 +32,8 @@ export default function LoginForm() {
 
   const { mutate: loginMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(Routes.ADMIN_LOGIN, data);
+      const response = await axios.post(Routes.LEARNER_LOGIN, data);
+
       if (!response.data.token) {
         return toast({
           title: "There was an error.",
@@ -40,13 +41,16 @@ export default function LoginForm() {
           variant: "destructive",
         });
       }
-      document.cookie = `adminToken=${response.data.token}; path=/`;
+
+      document.cookie = `learnerToken=${response.data.token}; path=/`;
       document.cookie = `name=${response.data.name}; path=/`;
+
       toast({
         title: "You have successfully logged in.",
         description: "Welcome back!",
       });
-      router.push("/admin");
+      router.push("/learner");
+
       return response.data;
     },
     onError: (err) => {

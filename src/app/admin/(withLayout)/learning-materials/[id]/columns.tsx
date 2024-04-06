@@ -19,14 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,13 +36,11 @@ import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader";
 import { useState } from "react";
-import DeleteCourse from "@/components/Course/DeleteCourse";
-import EditCourse from "@/components/Course/EditCourse";
-import ManageLearningTracks from "@/components/Course/ManageLearningTracks";
-import ManageTopics from "@/components/Course/ManageTopics";
-import { Course } from "@/types/types";
+import { LearningMaterial } from "@/types/types";
+import EditLearningMaterial from "@/components/Topic/LearningMaterial/EditLearningMaterial";
+import DeleteLearningMaterial from "@/components/Topic/LearningMaterial/DeleteLearningMaterial";
 
-export const columns: ColumnDef<Course>[] = [
+export const columns: ColumnDef<LearningMaterial>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -95,6 +86,18 @@ export const columns: ColumnDef<Course>[] = [
     ),
   },
   {
+    accessorKey: "link",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Link" />
+    ),
+  },
+  {
+    accessorKey: "type",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Type" />
+    ),
+  },
+  {
     id: "actions",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Actions" />
@@ -114,37 +117,8 @@ export const columns: ColumnDef<Course>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                <Sheet>
-                  <SheetTrigger>Manage Learning Tracks</SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>
-                        <h2>Manage Learning Tracks</h2>
-                      </SheetTitle>
-                      <SheetDescription>
-                        <ManageLearningTracks id={row.row.original.id} />
-                      </SheetDescription>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                <Sheet>
-                  <SheetTrigger>Manage Topics</SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>
-                        <h2>Manage Topics</h2>
-                      </SheetTitle>
-                      <SheetDescription>
-                        <ManageTopics id={row.row.original.id} />
-                      </SheetDescription>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
-              </DropdownMenuItem>
               <DropdownMenuSeparator />
+
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 {" "}
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -152,13 +126,15 @@ export const columns: ColumnDef<Course>[] = [
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle>
-                        <h2>Edit Course</h2>
+                        <h2>Edit Learning Material</h2>
                       </DialogTitle>
                       <DialogDescription>
-                        <EditCourse
+                        <EditLearningMaterial
                           id={row.row.original.id}
                           title={row.row.original.title}
                           description={row.row.original.description}
+                          link={row.row.original.link}
+                          type={row.row.original.type}
                           onClose={() => setIsOpen(false)}
                         />
                       </DialogDescription>
@@ -176,14 +152,14 @@ export const columns: ColumnDef<Course>[] = [
                       </AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently
-                        delete your learning track and remove your data from our
-                        servers.
+                        delete your learning material and remove your data from
+                        our servers.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
 
-                      <DeleteCourse
+                      <DeleteLearningMaterial
                         id={row.row.original.id}
                         onClose={() => setIsOpen(false)}
                       />

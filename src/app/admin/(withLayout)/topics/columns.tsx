@@ -48,6 +48,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import ManageCourses from "@/components/Topic/ManageCourses";
+import Link from "next/link";
 
 export const columns: ColumnDef<Topic>[] = [
   {
@@ -130,36 +131,22 @@ export const columns: ColumnDef<Topic>[] = [
                   </SheetContent>
                 </Sheet>
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                <Sheet>
-                  <SheetTrigger>Manage Learning Materials</SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>
-                        <h2>Manage Topics</h2>
-                      </SheetTitle>
-                      <SheetDescription>
-                        {/* <ManageTopics id={row.row.original.id} /> */}
-                      </SheetDescription>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                <Sheet>
-                  <SheetTrigger>Manage Assignments</SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>
-                        <h2>Manage Topics</h2>
-                      </SheetTitle>
-                      <SheetDescription>
-                        {/* <ManageTopics id={row.row.original.id} /> */}
-                      </SheetDescription>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
-              </DropdownMenuItem>
+              <Link href={`learning-materials/${row.row.original.id}`}>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  Learning Materials
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`assignments/${row.row.original.id}`}>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  Assignments
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 {" "}
@@ -192,7 +179,7 @@ export const columns: ColumnDef<Topic>[] = [
                       </AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently
-                        delete your learning track and remove your data from our
+                        delete your topic and remove your data from our
                         servers.
                       </AlertDialogDescription>
                     </AlertDialogHeader>

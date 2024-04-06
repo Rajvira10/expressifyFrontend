@@ -11,7 +11,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import AddLearningTrack from "@/components/LearningTrack/AddLearningTrack";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { Suspense } from "react";

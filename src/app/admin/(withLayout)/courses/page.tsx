@@ -16,16 +16,11 @@ import { DataTable } from "./data-table";
 import { Suspense } from "react";
 import Routes from "@/lib/routes";
 import AddCourse from "@/components/Course/AddCourse";
+import { Course } from "@/types/types";
 
 export const metadata: Metadata = {
   title: "Courses",
   description: "List of courses",
-};
-
-export type Course = {
-  id: number;
-  title: string;
-  description: string;
 };
 
 export default async function Dashboard() {

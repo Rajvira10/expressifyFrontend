@@ -40,64 +40,68 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Separator } from "../ui/separator";
-import { Course } from "@/types/types";
+import { Mentor } from "@/types/types";
 
-interface ManageCoursesProps {
+interface ManageMentorsProps {
   id: number;
 }
 
 type FormFields = {
-  course_id: number;
+  mentor_id: number;
 };
 
 const schema = z.object({
-  course_id: z.string(),
+  mentor_id: z.string(),
 });
 
-const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
+const ManageMentors: FC<ManageMentorsProps> = ({ id }) => {
   const router = useRouter();
   const { toast } = useToast();
 
   const adminToken = useCookies().get("adminToken");
 
   const {
-    data: courses,
+    data: mentors,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["courses"],
+    queryKey: ["mentors"],
     queryFn: async () => {
-      const response = await axios.get(Routes.GET_COURSES_BY_TOPIC(id), {
+      const response = await axios.get(Routes.GET_MENTORS_BY_LEARNER(id), {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },
       });
-      return response.data.courses as Course[];
+      return response.data.mentors as Mentor[];
     },
     enabled: !!adminToken,
   });
 
-  const { data: allCourses } = useQuery({
-    queryKey: ["allCourses"],
+  const { data: allMentors } = useQuery({
+    queryKey: ["allMentors"],
     queryFn: async () => {
-      const response = await axios.get(Routes.LIST_COURSES, {
+      const response = await axios.get(Routes.LIST_LEARNERS, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },
       });
 
-      return response.data.courses as Course[];
+      return response.data.mentors as Mentor[];
     },
     enabled: !!adminToken,
   });
 
-  const { mutate: courseMutation, isPending } = useMutation({
+  const { mutate: mentorMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
-      const response = await axios.post(Routes.ADD_COURSE_TO_TOPIC(id), data, {
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-        },
-      });
+      const response = await axios.post(
+        Routes.ADD_MENTOR_TO_LEARNER(id),
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+        }
+      );
 
       return response.data;
     },
@@ -111,7 +115,7 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Course added successfully.",
+        description: "Mentor added successfully.",
       });
       reset();
 
@@ -119,12 +123,12 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
     },
   });
 
-  const { mutate: removeCourseMutation } = useMutation({
-    mutationFn: async (courseId: number) => {
+  const { mutate: removeMentorMutation } = useMutation({
+    mutationFn: async (mentorId: number) => {
       const response = await axios.post(
-        Routes.REMOVE_COURSE_FROM_TOPIC(id),
+        Routes.REMOVE_MENTOR_FROM_LEARNER(id),
         {
-          course_id: courseId,
+          mentor_id: mentorId,
         },
         {
           headers: {
@@ -145,7 +149,7 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Course removed successfully.",
+        description: "Mentor removed successfully.",
       });
       reset();
 
@@ -155,17 +159,13 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
 
   const form = useForm<FormFields>({
     defaultValues: {
-      course_id: 0,
+      mentor_id: 0,
     },
     resolver: zodResolver(schema),
     mode: "onBlur",
   });
 
-  const {
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = form;
+  const { handleSubmit, reset } = form;
 
   if (isLoading) return <p>Loading...</p>;
   if (error)
@@ -176,33 +176,34 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
   return (
     <>
       <Table>
-        {/* <TableCaption>Learning Tracks</TableCaption> */}
         <TableHeader>
           <TableRow>
             <TableHead className="w-[50px]">#</TableHead>
-            <TableHead>Course Name</TableHead>
+            <TableHead>Mentor Name</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {courses?.map((course, index) => (
-            <TableRow key={course.id}>
+          {mentors?.map((mentor, index) => (
+            <TableRow key={mentor.id}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{course.title}</TableCell>
+              <TableCell>
+                {mentor.first_name} {mentor.last_name}
+              </TableCell>
               <TableCell>
                 <Button
                   size="sm"
                   variant={"destructive"}
-                  onClick={() => removeCourseMutation(course.id)}
+                  onClick={() => removeMentorMutation(mentor.id)}
                 >
                   Remove
                 </Button>
               </TableCell>
             </TableRow>
           ))}
-          {courses?.length === 0 && (
+          {mentors?.length === 0 && (
             <TableRow>
-              <TableCell colSpan={2}>No courses found</TableCell>
+              <TableCell colSpan={2}>No mentors found</TableCell>
             </TableRow>
           )}
         </TableBody>
@@ -210,15 +211,15 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
       <Separator />
       <Form {...form}>
         <form
-          onSubmit={handleSubmit((e) => courseMutation(e))}
+          onSubmit={handleSubmit((e) => mentorMutation(e))}
           className="mt-5 w-2/3 space-y-6"
         >
           <FormField
             control={form.control}
-            name="course_id"
+            name="mentor_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Course</FormLabel>
+                <FormLabel>Mentor</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={`${field.value}`}
@@ -229,17 +230,14 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {allCourses?.map((course) => (
-                      <SelectItem key={course.id} value={`${course.id}`}>
-                        {course.title}
+                    {allMentors?.map((mentor) => (
+                      <SelectItem key={mentor.id} value={`${mentor.id}`}>
+                        {mentor.first_name} {mentor.last_name}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                {errors.course_id && (
-                  <p className="text-red-500 text-sm">Course is required</p>
-                )}
-                <FormDescription>Add a course to this topic</FormDescription>
+                <FormDescription>Add a mentor to this learner</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -253,4 +251,4 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
   );
 };
 
-export default ManageCourses;
+export default ManageMentors;

@@ -1,70 +1,110 @@
 const Routes = {
   ADMIN_LOGIN: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
-  ADMIN_LOGOUT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/logout`,
+  ADMIN_LOGOUT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/user/logout`,
 
-  LIST_CATEGORIES: `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/list`,
-  ADD_CATEGORY: `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/store`,
+  LIST_CATEGORIES: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/list`,
+  ADD_CATEGORY: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/store`,
   UPDATE_CATEGORY: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/update/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/update/${id}`,
   DELETE_CATEGORY: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/delete/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/delete/${id}`,
   GET_LEARNING_TRACKS_BY_CATEGORY: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/learning-tracks/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/learning-tracks/${id}`,
   ADD_LEARNING_TRACK_TO_CATEGORY: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/add-learning-track/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/add-learning-track/${id}`,
   REMOVE_LEARNING_TRACK_FROM_CATEGORY: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/category/remove-learning-track/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/category/remove-learning-track/${id}`,
 
-  LIST_LEARNING_TRACKS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/list`,
-  ADD_LEARNING_TRACK: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/store`,
+  LIST_LEARNING_TRACKS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/list`,
+  ADD_LEARNING_TRACK: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/store`,
   UPDATE_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/update/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/update/${id}`,
   DELETE_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/delete/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/delete/${id}`,
   GET_CATEGORIES_BY_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/categories/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/categories/${id}`,
   ADD_CATEGORY_TO_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/add-category/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/add-category/${id}`,
   REMOVE_CATEGORY_FROM_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/remove-category/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/remove-category/${id}`,
   GET_COURSES_BY_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/courses/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/courses/${id}`,
   ADD_COURSE_TO_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/add-course/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/add-course/${id}`,
   REMOVE_COURSE_FROM_LEARNING_TRACK: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learning-track/remove-course/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-track/remove-course/${id}`,
 
-  LIST_COURSES: `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/list`,
-  ADD_COURSE: `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/store`,
+  LIST_COURSES: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/list`,
+  ADD_COURSE: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/store`,
   UPDATE_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/update/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/update/${id}`,
   DELETE_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/delete/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/delete/${id}`,
   GET_LEARNING_TRACKS_BY_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/learning-tracks/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/learning-tracks/${id}`,
   ADD_LEARNING_TRACK_TO_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/add-learning-track/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/add-learning-track/${id}`,
   REMOVE_LEARNING_TRACK_FROM_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/remove-learning-track/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/remove-learning-track/${id}`,
   GET_TOPICS_BY_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/topics/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/topics/${id}`,
   ADD_TOPIC_TO_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/add-topic/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/add-topic/${id}`,
   REMOVE_TOPIC_FROM_COURSE: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/remove-topic/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/course/remove-topic/${id}`,
 
-  LIST_TOPICS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/list`,
-  ADD_TOPIC: `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/store`,
+  LIST_TOPICS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/list`,
+  ADD_TOPIC: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/store`,
   UPDATE_TOPIC: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/update/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/update/${id}`,
   DELETE_TOPIC: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/delete/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/delete/${id}`,
   GET_COURSES_BY_TOPIC: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/courses/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/courses/${id}`,
   ADD_COURSE_TO_TOPIC: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/add-course/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/add-course/${id}`,
   REMOVE_COURSE_FROM_TOPIC: (id: number) =>
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/topic/remove-course/${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/topic/remove-course/${id}`,
+  GET_ASSIGNMENTS_BY_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/list/${id}`,
+  GET_ASSIGNMENT_BY_ID: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/detail/${id}`,
+  ADD_ASSIGNMENT_TO_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/store/${id}`,
+  UPDATE_ASSIGNMENT_FROM_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/update/${id}`,
+  DELETE_ASSIGNMENT_FROM_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/delete/${id}`,
+  GET_LEARNING_MATERIALS_BY_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-material/list/${id}`,
+  ADD_LEARNING_MATERIAL_TO_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-material/store/${id}`,
+  UPDATE_LEARNING_MATERIAL_FROM_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-material/update/${id}`,
+  DELETE_LEARNING_MATERIAL_FROM_TOPIC: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learning-material/delete/${id}`,
+  GET_ASSIGNMENT_METRICS_BY_ASSIGNMENT: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/assignment-metrics/${id}`,
+  ADD_ASSIGNMENT_METRIC_TO_ASSIGNMENT: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/add-assignment-metric/${id}`,
+  REMOVE_ASSIGNMENT_METRIC_FROM_ASSIGNMENT: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/assignment/remove-assignment-metric/${id}`,
+
+  LIST_LEARNERS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learner/list`,
+  ADD_MENTOR_TO_LEARNER: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learner/assign-mentor/${id}`,
+  REMOVE_MENTOR_FROM_LEARNER: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learner/remove-mentor/${id}`,
+  GET_MENTORS_BY_LEARNER: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/learner/assigned-mentors/${id}`,
+
+  LIST_MENTORS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/mentor/list`,
+  ADD_LEARNER_TO_MENTOR: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/mentor/assign-learner/${id}`,
+  REMOVE_LEARNER_FROM_MENTOR: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/mentor/remove-learner/${id}`,
+  GET_LEARNERS_BY_MENTOR: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/mentor/assigned-learners/${id}`,
 };
 
 export default Routes;

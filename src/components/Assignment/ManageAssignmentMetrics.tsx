@@ -23,14 +23,6 @@ import {
 } from "@/components/ui/table";
 
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-import {
   Form,
   FormControl,
   FormDescription,
@@ -40,92 +32,52 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Separator } from "../ui/separator";
-import { Course } from "@/types/types";
+import { AssignmentMetric, Topic } from "@/types/types";
+import { Input } from "../ui/input";
 
-interface ManageCoursesProps {
+interface ManageAssignmentMetricsProps {
   id: number;
 }
 
 type FormFields = {
-  course_id: number;
+  title: string;
 };
 
 const schema = z.object({
-  course_id: z.string(),
+  title: z.string(),
 });
 
-const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
+const ManageAssignmentMetrics: FC<ManageAssignmentMetricsProps> = ({ id }) => {
   const router = useRouter();
   const { toast } = useToast();
 
   const adminToken = useCookies().get("adminToken");
 
   const {
-    data: courses,
+    data: assignment_metrics,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["courses"],
+    queryKey: ["assignment_metrics"],
     queryFn: async () => {
-      const response = await axios.get(Routes.GET_COURSES_BY_TOPIC(id), {
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-        },
-      });
-      return response.data.courses as Course[];
-    },
-    enabled: !!adminToken,
-  });
-
-  const { data: allCourses } = useQuery({
-    queryKey: ["allCourses"],
-    queryFn: async () => {
-      const response = await axios.get(Routes.LIST_COURSES, {
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-        },
-      });
-
-      return response.data.courses as Course[];
-    },
-    enabled: !!adminToken,
-  });
-
-  const { mutate: courseMutation, isPending } = useMutation({
-    mutationFn: async (data: FormFields) => {
-      const response = await axios.post(Routes.ADD_COURSE_TO_TOPIC(id), data, {
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-        },
-      });
-
-      return response.data;
-    },
-    onError: (err) => {
-      return toast({
-        title: "There was an error.",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    },
-    onSuccess: () => {
-      toast({
-        title: "Success",
-        description: "Course added successfully.",
-      });
-      reset();
-
-      router.refresh();
-    },
-  });
-
-  const { mutate: removeCourseMutation } = useMutation({
-    mutationFn: async (courseId: number) => {
-      const response = await axios.post(
-        Routes.REMOVE_COURSE_FROM_TOPIC(id),
+      const response = await axios.get(
+        Routes.GET_ASSIGNMENT_METRICS_BY_ASSIGNMENT(id),
         {
-          course_id: courseId,
-        },
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+        }
+      );
+      return response.data.assignment_metrics as AssignmentMetric[];
+    },
+    enabled: !!adminToken,
+  });
+
+  const { mutate: assignmentMutation, isPending } = useMutation({
+    mutationFn: async (data: FormFields) => {
+      const response = await axios.post(
+        Routes.ADD_ASSIGNMENT_METRIC_TO_ASSIGNMENT(id),
+        data,
         {
           headers: {
             Authorization: `Bearer ${adminToken}`,
@@ -145,7 +97,39 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Course removed successfully.",
+        description: "Assignment Metric added successfully.",
+      });
+      reset();
+
+      router.refresh();
+    },
+  });
+
+  const { mutate: removeAssignmentMetricMutation } = useMutation({
+    mutationFn: async (assignmentMetricId: number) => {
+      const response = await axios.post(
+        Routes.REMOVE_ASSIGNMENT_METRIC_FROM_ASSIGNMENT(assignmentMetricId),
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+        }
+      );
+
+      return response.data;
+    },
+    onError: (err) => {
+      return toast({
+        title: "There was an error.",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "Assignment Metric removed successfully.",
       });
       reset();
 
@@ -155,17 +139,13 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
 
   const form = useForm<FormFields>({
     defaultValues: {
-      course_id: 0,
+      title: "",
     },
     resolver: zodResolver(schema),
     mode: "onBlur",
   });
 
-  const {
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = form;
+  const { register, handleSubmit, reset } = form;
 
   if (isLoading) return <p>Loading...</p>;
   if (error)
@@ -176,70 +156,52 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
   return (
     <>
       <Table>
-        {/* <TableCaption>Learning Tracks</TableCaption> */}
+        {/* <TableCaption>Topics</TableCaption> */}
         <TableHeader>
           <TableRow>
             <TableHead className="w-[50px]">#</TableHead>
-            <TableHead>Course Name</TableHead>
+            <TableHead>Topic Name</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {courses?.map((course, index) => (
-            <TableRow key={course.id}>
+          {assignment_metrics?.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={2}>No topics found</TableCell>
+            </TableRow>
+          )}
+          {assignment_metrics?.map((metric, index) => (
+            <TableRow key={metric.id}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{course.title}</TableCell>
+              <TableCell>{metric.title}</TableCell>
               <TableCell>
                 <Button
                   size="sm"
                   variant={"destructive"}
-                  onClick={() => removeCourseMutation(course.id)}
+                  onClick={() => removeAssignmentMetricMutation(metric.id)}
                 >
                   Remove
                 </Button>
               </TableCell>
             </TableRow>
           ))}
-          {courses?.length === 0 && (
-            <TableRow>
-              <TableCell colSpan={2}>No courses found</TableCell>
-            </TableRow>
-          )}
         </TableBody>
       </Table>
       <Separator />
       <Form {...form}>
         <form
-          onSubmit={handleSubmit((e) => courseMutation(e))}
+          onSubmit={handleSubmit((e) => assignmentMutation(e))}
           className="mt-5 w-2/3 space-y-6"
         >
           <FormField
             control={form.control}
-            name="course_id"
+            name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Course</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={`${field.value}`}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {allCourses?.map((course) => (
-                      <SelectItem key={course.id} value={`${course.id}`}>
-                        {course.title}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.course_id && (
-                  <p className="text-red-500 text-sm">Course is required</p>
-                )}
-                <FormDescription>Add a course to this topic</FormDescription>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="Title" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -253,4 +215,4 @@ const ManageCourses: FC<ManageCoursesProps> = ({ id }) => {
   );
 };
 
-export default ManageCourses;
+export default ManageAssignmentMetrics;

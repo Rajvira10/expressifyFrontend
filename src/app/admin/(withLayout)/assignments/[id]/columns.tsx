@@ -19,14 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,13 +36,13 @@ import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/Table/DataTableColumnHeader";
 import { useState } from "react";
-import DeleteCourse from "@/components/Course/DeleteCourse";
-import EditCourse from "@/components/Course/EditCourse";
-import ManageLearningTracks from "@/components/Course/ManageLearningTracks";
-import ManageTopics from "@/components/Course/ManageTopics";
-import { Course } from "@/types/types";
+import { Assignment } from "@/types/types";
+import EditAssignment from "@/components/Topic/Assignment/EditAssignment";
+import DeleteAssignment from "@/components/Topic/Assignment/DeleteAssignment";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import ManageAssignmentMetrics from "@/components/Assignment/ManageAssignmentMetrics";
 
-export const columns: ColumnDef<Course>[] = [
+export const columns: ColumnDef<Assignment>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -114,37 +107,24 @@ export const columns: ColumnDef<Course>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 <Sheet>
-                  <SheetTrigger>Manage Learning Tracks</SheetTrigger>
+                  <SheetTrigger>Manage Assignment Metrics</SheetTrigger>
                   <SheetContent>
                     <SheetHeader>
                       <SheetTitle>
                         <h2>Manage Learning Tracks</h2>
                       </SheetTitle>
                       <SheetDescription>
-                        <ManageLearningTracks id={row.row.original.id} />
-                      </SheetDescription>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                <Sheet>
-                  <SheetTrigger>Manage Topics</SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>
-                        <h2>Manage Topics</h2>
-                      </SheetTitle>
-                      <SheetDescription>
-                        <ManageTopics id={row.row.original.id} />
+                        <ManageAssignmentMetrics id={row.row.original.id} />
                       </SheetDescription>
                     </SheetHeader>
                   </SheetContent>
                 </Sheet>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 {" "}
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -152,10 +132,10 @@ export const columns: ColumnDef<Course>[] = [
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle>
-                        <h2>Edit Course</h2>
+                        <h2>Edit Assignment</h2>
                       </DialogTitle>
                       <DialogDescription>
-                        <EditCourse
+                        <EditAssignment
                           id={row.row.original.id}
                           title={row.row.original.title}
                           description={row.row.original.description}
@@ -176,14 +156,14 @@ export const columns: ColumnDef<Course>[] = [
                       </AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently
-                        delete your learning track and remove your data from our
+                        delete your assignment and remove your data from our
                         servers.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
 
-                      <DeleteCourse
+                      <DeleteAssignment
                         id={row.row.original.id}
                         onClose={() => setIsOpen(false)}
                       />

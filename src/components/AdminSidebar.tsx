@@ -91,7 +91,9 @@ const AdminSidebar: FC<AdminSidebarProps> = ({}) => {
               href="/admin/topics"
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
-                active?.includes("topics")
+                active?.includes("topics") ||
+                  active?.includes("assignments") ||
+                  active?.includes("learning-materials")
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}

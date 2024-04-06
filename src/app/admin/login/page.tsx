@@ -33,7 +33,7 @@ export default function LoginForm() {
   const { mutate: loginMutation, isPending } = useMutation({
     mutationFn: async (data: FormFields) => {
       const response = await axios.post(Routes.ADMIN_LOGIN, data);
-
+      console.log(response);
       document.cookie = `adminToken=${response.data.token}; path=/`;
       document.cookie = `name=${response.data.name}; path=/`;
 

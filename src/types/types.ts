@@ -33,13 +33,14 @@ export type Assignment = {
   id: number;
   title: string;
   description: string;
-  topic: Topic | null;
+  //   topic: Topic | null;
+  assignment_metrics: AssignmentMetric[] | null;
 };
 
 export type AssignmentMetric = {
   id: number;
   title: string;
-  assignment: Assignment | null;
+  //   assignment: Assignment | null;
 };
 
 export type LearningMaterial = {
@@ -48,7 +49,7 @@ export type LearningMaterial = {
   description: string;
   link: string;
   type: "Video" | "Document";
-  topic: Topic | null;
+  //   topic: Topic | null;
 };
 
 export type Learner = {

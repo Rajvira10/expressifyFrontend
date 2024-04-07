@@ -88,11 +88,11 @@ const EditCategory: FC<EditCategoryProps> = ({
       <div className="grid gap-2 mt-4">
         <Label htmlFor="title">Title</Label>
         <Input
+          {...register("title")}
           id="title"
           type="text"
           placeholder="Enter title"
           required
-          {...register("title")}
         />
         {errors.title && (
           <p className="text-red-500 text-sm">Title is required</p>

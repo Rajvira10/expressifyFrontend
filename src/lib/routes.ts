@@ -108,6 +108,24 @@ const Routes = {
 
   LEARNER_LOGIN: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/login`,
   LEARNER_LOGOUT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/logout`,
+
+  LEARNER_LIST_CATEGORIES: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/category/list`,
+
+  LEARNER_LIST_LEARNING_TRACKS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/learning-track/list`,
+  LEARNER_GET_LEARNING_TRACK: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/learning-track/detail/${id}`,
+  LEARNER_GET_CATEGORIES_BY_LEARNING_TRACK: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/learning-track/categories/${id}`,
+  LEARNER_GET_COURSES_BY_LEARNING_TRACK: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/learning-track/courses/${id}`,
+
+  LEARNER_LIST_COURSES: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/list`,
+  LEARNER_GET_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/detail/${id}`,
+  LEARNER_GET_LEARNING_TRACKS_BY_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/learning-tracks/${id}`,
+  LEARNER_GET_TOPICS_BY_COURSE: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/topics/${id}`,
 };
 
 export default Routes;

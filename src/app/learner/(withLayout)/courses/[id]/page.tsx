@@ -19,6 +19,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import AssignmentCard from "@/components/Assignment/AssignmentCard";
 
 interface CoursesProps {
   params: {
@@ -43,40 +44,7 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
 
   const topics: Topic[] = data.data.topics;
 
-  const learningMaterials: LearningMaterial[] = [
-    {
-      id: 1,
-      title: "Introduction to Topic",
-      description: "Watch this video to get started with the topic.",
-      link: "VIDEO_ID_HERE",
-      type: "Video",
-    },
-    {
-      id: 2,
-      title: "Deep Dive into Topic",
-      description: "A detailed explanation of the topic.",
-      link: "VIDEO_ID_HERE",
-      type: "Video",
-    },
-    {
-      id: 3,
-      title: "Advanced Concepts",
-      description: "Explore advanced concepts related to the topic.",
-      link: "VIDEO_ID_HERE",
-      type: "Video",
-    },
-  ];
-
-  const assignment: Assignment = {
-    id: 1,
-    title: "Assignment Title",
-    description: "Complete the following assignment",
-    assignment_metrics: [
-      { id: 1, title: "Criterion 1" },
-      { id: 2, title: "Criterion 2" },
-      { id: 3, title: "Criterion 3" },
-    ],
-  };
+  console.log(topics);
 
   return (
     <>
@@ -92,7 +60,7 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/learning-tracks">
+              <BreadcrumbLink href="/learner/learning-tracks">
                 Learning Tracks
               </BreadcrumbLink>
             </BreadcrumbItem>
@@ -115,7 +83,7 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
         {course.data.course.title}
       </h1>
       <h3>{course.data.course.description}</h3>
-      <Tabs defaultValue={`${topics[0].id}`} className="w-full">
+      <Tabs defaultValue={`${topics[0]?.id}`} className="w-full">
         <TabsList>
           {topics.map((topic) => (
             <div key={topic.id}>
@@ -134,7 +102,7 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
                   <h3 className="text-lg font-semibold my-5">
                     Learning Materials
                   </h3>
-                  {learningMaterials.map((material) => (
+                  {topic.learning_materials?.map((material) => (
                     <div key={material.id} className="mb-4">
                       <h4 className="text-md font-medium mb-1">
                         {material.title}
@@ -144,7 +112,7 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
                       </p>
                       <div className="aspect-w-16 aspect-h-9">
                         <iframe
-                          src={`https://www.youtube.com/embed/${material.link}`}
+                          src={`${material.link}`}
                           allowFullScreen
                           title={material.title}
                           className="w-full h-[300px]"
@@ -154,25 +122,13 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
                   ))}
                 </div>
                 {/* Assignment */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Assignment</h3>
-                  <h4 className="text-md font-medium mb-1">
-                    {assignment.title}
-                  </h4>
-                  <p className="text-sm text-gray-600 mb-2">
-                    {assignment.description}
-                  </p>
-                  <h4 className="text-md font-medium mb-1">Criteria</h4>
-                  <ul className="list-disc pl-5 mb-2">
-                    {assignment.assignment_metrics?.map((criterion, index) => (
-                      <Badge key={index} variant="default">
-                        {criterion.title}
-                      </Badge>
+                <div className="mt-6">
+                  <h3 className="text-lg font-semibold mb-4">Assignments</h3>
+                  <div className="grid grid-cols-2 gap-10">
+                    {topic.assignments?.map((assignment, index) => (
+                      <AssignmentCard key={index} assignment={assignment} />
                     ))}
-                  </ul>
-                  <Button className="text-center mt-3">
-                    Submit Assignment
-                  </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

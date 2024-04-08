@@ -63,7 +63,7 @@ const LearningTracks: FC<LearningTracksProps> = async ({ params }) => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/learning-tracks">
+              <BreadcrumbLink href="/learner/learning-tracks">
                 Learning Tracks
               </BreadcrumbLink>
             </BreadcrumbItem>
@@ -89,20 +89,37 @@ const LearningTracks: FC<LearningTracksProps> = async ({ params }) => {
       </div>
       <div className="grid grid-cols-4 gap-10">
         {courses.map((course) => (
-          <Link
-            href={`/learner/courses/${course.id}`}
-            key={course.id}
-            className="min-h-[200px] w-full flex justify-start items-start p-6 my-4 bg-white border border-black rounded-lg shadow-md"
-          >
-            <div>
-              <h3 className="text-lg font-semibold">{course.title}</h3>
-              <div className="flex align-center mt-2">
-                <MdTopic className="h-6 w-6 mr-2" />
-                {course.topics?.length} Topics
+          <>
+            {course.topics?.length == 0 ? (
+              <div
+                key={course.id}
+                className="min-h-[200px] w-full flex justify-start items-start p-6 my-4 bg-white border border-black rounded-lg shadow-md"
+              >
+                <div>
+                  <h3 className="text-lg font-semibold">{course.title}</h3>
+
+                  <h1>Will Be Available Soon</h1>
+                </div>
               </div>
-            </div>
-          </Link>
+            ) : (
+              <Link
+                href={`/learner/courses/${course.id}`}
+                key={course.id}
+                className="min-h-[200px] w-full flex justify-start items-start p-6 my-4 bg-white border border-black rounded-lg shadow-md"
+              >
+                <div>
+                  <h3 className="text-lg font-semibold">{course.title}</h3>
+
+                  <div className="flex align-center mt-2">
+                    <MdTopic className="h-6 w-6 mr-2" />
+                    {course.topics?.length} Topics
+                  </div>
+                </div>
+              </Link>
+            )}
+          </>
         ))}
+        {courses.length === 0 && <h1>Courses will be available soon.</h1>}
       </div>
     </>
   );

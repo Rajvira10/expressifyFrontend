@@ -198,7 +198,7 @@ const ManageAssignmentMetrics: FC<ManageAssignmentMetricsProps> = ({ id }) => {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Title</FormLabel>
                 <FormControl>
                   <Input placeholder="Title" {...field} />
                 </FormControl>

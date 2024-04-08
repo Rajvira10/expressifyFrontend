@@ -126,6 +126,8 @@ const Routes = {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/learning-tracks/${id}`,
   LEARNER_GET_TOPICS_BY_COURSE: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/topics/${id}`,
+
+  LEARNER_SUBMIT_ASSIGNMENT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/store`,
 };
 
 export default Routes;

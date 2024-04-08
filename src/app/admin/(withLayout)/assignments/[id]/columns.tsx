@@ -114,7 +114,7 @@ export const columns: ColumnDef<Assignment>[] = [
                   <SheetContent>
                     <SheetHeader>
                       <SheetTitle>
-                        <h2>Manage Learning Tracks</h2>
+                        <h2>Manage Assignment Metrics</h2>
                       </SheetTitle>
                       <SheetDescription>
                         <ManageAssignmentMetrics id={row.row.original.id} />

@@ -27,6 +27,7 @@ export type Topic = {
   description: string;
   courses: Course[] | null;
   assignments: Assignment[] | null;
+  learning_materials: LearningMaterial[] | null;
 };
 
 export type Assignment = {

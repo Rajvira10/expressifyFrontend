@@ -76,16 +76,16 @@ const LearnerSidebar: FC<LearnerSidebarProps> = ({}) => {
               Learning Tracks
             </Link>
             <Link
-              href="/learner/profile"
+              href="/learner/my-submissions"
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
-                active?.includes("profile")
+                active?.includes("my-submissions")
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground"
               )}
             >
               <ImProfile className="h-4 w-4" />
-              Profile
+              My Submissions
             </Link>
           </nav>
         </div>

@@ -70,3 +70,15 @@ export type Mentor = {
   email: string;
   learners: Learner[] | null;
 };
+
+export type Submission = {
+  id: number;
+  assignment_id: number;
+  learner_id: number;
+  content: string;
+  link: string;
+  average_score: number | null;
+  created_at: EpochTimeStamp;
+  updated_at: EpochTimeStamp;
+  assignment: Assignment;
+};

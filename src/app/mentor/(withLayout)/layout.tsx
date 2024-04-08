@@ -11,18 +11,16 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CircleUser, Menu, Search } from "lucide-react";
 import { FC } from "react";
-import { cookies } from "next/headers";
 import LearnerSidebar from "@/components/LearnerSidebar";
 import LearnerMobileSidebar from "@/components/LearnerMobileSidebar";
 import LearnerLogout from "@/components/LearnerLogout";
+import MentorLogout from "@/components/MentorLogout";
 
 interface layoutProps {
   children: React.ReactNode;
 }
 
 const Layout: FC<layoutProps> = ({ children }) => {
-  const cookieStore = cookies();
-
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <LearnerSidebar />
@@ -67,7 +65,7 @@ const Layout: FC<layoutProps> = ({ children }) => {
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <LearnerLogout />
+                <MentorLogout />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -127,7 +127,14 @@ const Routes = {
   LEARNER_GET_TOPICS_BY_COURSE: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/topics/${id}`,
 
+  LEARNER_GET_MY_ASSIGNMENTS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/list`,
+  LEARNER_GET_ASSIGNMENT: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/detail/${id}`,
   LEARNER_SUBMIT_ASSIGNMENT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/store`,
+  LEARNER_GET_MY_SUBMISSIONS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/my-assignment-submissions`,
+
+  MENTOR_LOGIN: `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/login`,
+  MENTOR_LOGOUT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/logout`,
 };
 
 export default Routes;

@@ -16,6 +16,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Progress } from "@/components/ui/progress";
 
 interface LearningTracksProps {
   params: {
@@ -75,6 +76,17 @@ const LearningTracks: FC<LearningTracksProps> = async ({ params }) => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+      </div>
+      <div className="flex items-center">
+        <IoMdCheckmarkCircleOutline className="text-4xl mr-2" />
+        <div className="flex justify-between items-center ">
+          Track Progress :{" "}
+          <Progress
+            className="mx-2 border border-black w-[300px]"
+            value={learningTrack.data.learning_track.progress_percentage}
+          />{" "}
+          {learningTrack.data.learning_track.progress_percentage.toFixed(2)}%
+        </div>
       </div>
       <p>{learningTrack.data.learning_track.description}</p>
       <div className="flex align-center space-x-5">

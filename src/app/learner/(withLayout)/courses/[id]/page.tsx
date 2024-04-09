@@ -74,9 +74,12 @@ const Courses: FC<CoursesProps> = async ({ params }) => {
       <div className="flex items-center">
         <IoMdCheckmarkCircleOutline className="text-4xl mr-2" />
         <div className="flex justify-between items-center ">
-          Track Progress :{" "}
-          <Progress className="mx-2 border border-black w-[300px]" value={33} />{" "}
-          33%
+          Course Progress :{" "}
+          <Progress
+            className="mx-2 border border-black w-[300px]"
+            value={course.data.course.progress_percentage}
+          />{" "}
+          {course.data.course.progress_percentage.toFixed(2)}%
         </div>
       </div>
       <h1 className="flex items-center font-bold text-xl">

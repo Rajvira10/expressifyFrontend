@@ -50,7 +50,7 @@ const LearnerSidebar: FC<LearnerSidebarProps> = ({}) => {
               <Home className="h-4 w-4" />
               Dashboard
             </Link>
-            <Link
+            {/* <Link
               href="/learner/my-journey"
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary-foreground",
@@ -61,7 +61,7 @@ const LearnerSidebar: FC<LearnerSidebarProps> = ({}) => {
             >
               <GiJourney className="h-4 w-4" />
               My Journey
-            </Link>
+            </Link> */}
             <Link
               href="/learner/learning-tracks"
               className={cn(

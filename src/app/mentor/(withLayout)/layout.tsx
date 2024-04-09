@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CircleUser, Menu, Search } from "lucide-react";
 import { FC } from "react";
-import LearnerSidebar from "@/components/LearnerSidebar";
 import LearnerMobileSidebar from "@/components/LearnerMobileSidebar";
-import LearnerLogout from "@/components/LearnerLogout";
 import MentorLogout from "@/components/MentorLogout";
+import MentorSidebar from "@/components/MentorSidebar";
+import MentorMobileSidebar from "@/components/MentorMobileSidebar";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ interface layoutProps {
 const Layout: FC<layoutProps> = ({ children }) => {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <LearnerSidebar />
+      <MentorSidebar />
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <Sheet>
@@ -37,7 +37,7 @@ const Layout: FC<layoutProps> = ({ children }) => {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <LearnerMobileSidebar />
+            <MentorMobileSidebar />
           </Sheet>
           <div className="w-full flex-1">
             <form>

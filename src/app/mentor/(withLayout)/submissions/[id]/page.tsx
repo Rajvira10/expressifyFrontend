@@ -22,7 +22,6 @@ import { FC } from "react";
 
 import AddReview from "@/components/Review/AddReview";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 
 interface pageProps {
   params: {
@@ -32,21 +31,21 @@ interface pageProps {
 
 const page: FC<pageProps> = async ({ params }) => {
   const { id } = params;
-  const learnerToken = cookies().get("learnerToken")?.value;
+  const mentorToken = cookies().get("mentorToken")?.value;
 
-  const data = await axios.get(Routes.LEARNER_GET_SUBMISSION(id), {
+  const data = await axios.get(Routes.MENTOR_GET_SUBMISSION(id), {
     headers: {
-      Authorization: `Bearer ${learnerToken}`,
+      Authorization: `Bearer ${mentorToken}`,
     },
   });
 
   const submission: Submission = data.data.submission;
 
   const allReviews = await axios.get(
-    Routes.LEARNER_GET_REVIEWS_OF_SUBMISSION(submission.id),
+    Routes.MENTOR_GET_REVIEWS_OF_SUBMISSION(submission.id),
     {
       headers: {
-        Authorization: `Bearer ${learnerToken}`,
+        Authorization: `Bearer ${mentorToken}`,
       },
     }
   );
@@ -54,7 +53,7 @@ const page: FC<pageProps> = async ({ params }) => {
   const reviews: any = allReviews.data.reviews;
 
   return (
-    <div className="container mx-auto p-4 relative">
+    <div className="container mx-auto p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold mb-4">
           {submission.assignment.title}
@@ -79,19 +78,12 @@ const page: FC<pageProps> = async ({ params }) => {
       </div>
       <p className="text-gray-700 mb-6">{submission.assignment.description}</p>
 
-      <div className="flex justify-between items-center">
-        <div className="mb-6 flex space-x-3">
-          {submission.assignment.assignment_metrics?.map((metric) => (
-            <div key={metric.id} className="mb-4">
-              <Badge>{metric.title}</Badge>
-            </div>
-          ))}
-        </div>
-        {Object.keys(reviews).length > 0 && submission.average_score < 7 ? (
-          <Image src={"/Capture.PNG"} alt="failed" width={150} height={30}/>
-        ) : (
-          ""
-        )}
+      <div className="mb-6 flex space-x-3">
+        {submission.assignment.assignment_metrics?.map((metric) => (
+          <div key={metric.id} className="mb-4">
+            <Badge>{metric.title}</Badge>
+          </div>
+        ))}
       </div>
 
       <div className="mb-6">
@@ -106,6 +98,11 @@ const page: FC<pageProps> = async ({ params }) => {
       <div className="border-t border-gray-200 pt-6">
         <div className="flex justify-between items-center w-full">
           <h2 className="text-2xl font-bold mb-4">Reviews</h2>
+          <AddReview
+            id={submission.id}
+            metrics={submission.assignment.assignment_metrics}
+            learner_id={submission.learner_id}
+          />
         </div>
         <div className="text-gray-700">
           {Object.keys(reviews).length > 0 ? (

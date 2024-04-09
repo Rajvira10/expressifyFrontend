@@ -15,9 +15,9 @@ import { GiTeacher } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-interface LearnerMobileSidebarProps {}
+interface MentorMobileSidebarProps {}
 
-const LearnerMobileSidebar: FC<LearnerMobileSidebarProps> = ({}) => {
+const MentorMobileSidebar: FC<MentorMobileSidebarProps> = ({}) => {
   const [active, setActive] = useState<string | null>(null);
   const pathname = usePathname();
   useEffect(() => {
@@ -51,6 +51,9 @@ const LearnerMobileSidebar: FC<LearnerMobileSidebarProps> = ({}) => {
         >
           <TrainTrack className="h-5 w-5" />
           Learning Tracks
+          {/* <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+            6
+          </Badge> */}
         </Link>
         <Link
           href="/admin/courses"
@@ -105,4 +108,4 @@ const LearnerMobileSidebar: FC<LearnerMobileSidebarProps> = ({}) => {
   );
 };
 
-export default LearnerMobileSidebar;
+export default MentorMobileSidebar;

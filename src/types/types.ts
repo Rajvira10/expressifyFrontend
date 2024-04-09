@@ -77,8 +77,18 @@ export type Submission = {
   learner_id: number;
   content: string;
   link: string;
-  average_score: number | null;
+  average_score: number;
   created_at: EpochTimeStamp;
   updated_at: EpochTimeStamp;
   assignment: Assignment;
+  learner: Learner | null;
+};
+
+export type Review = {
+  id: number;
+  note: string;
+  score: number;
+  assignment_metric: AssignmentMetric;
+  learner: Learner;
+  mentor: Mentor;
 };

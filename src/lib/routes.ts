@@ -127,14 +127,25 @@ const Routes = {
   LEARNER_GET_TOPICS_BY_COURSE: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/course/topics/${id}`,
 
-  LEARNER_GET_MY_ASSIGNMENTS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/list`,
-  LEARNER_GET_ASSIGNMENT: (id: number) =>
+  LEARNER_GET_SUBMISSIONS_OF_ASSIGNMENTS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/list`,
+  LEARNER_GET_SUBMISSION: (id: number) =>
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/detail/${id}`,
   LEARNER_SUBMIT_ASSIGNMENT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/store`,
   LEARNER_GET_MY_SUBMISSIONS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/assignment/my-assignment-submissions`,
+  LEARNER_GET_REVIEWS_OF_SUBMISSION: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/learner/review/list/${id}`,
 
   MENTOR_LOGIN: `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/login`,
   MENTOR_LOGOUT: `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/logout`,
+
+  MENTOR_GET_MY_SUBMISSIONS: `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/assignment/list`,
+  MENTOR_GET_SUBMISSION: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/assignment/detail/${id}`,
+
+  MENTOR_GET_REVIEWS_OF_SUBMISSION: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/review/list/${id}`,
+  MENTOR_ADD_REVIEW: (id: number) =>
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/review/store/${id}`,
 };
 
 export default Routes;
